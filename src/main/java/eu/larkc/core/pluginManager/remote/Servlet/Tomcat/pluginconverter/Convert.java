@@ -144,9 +144,9 @@ public class Convert {
 
 			// STEP 2. Add the platform jar
 			InputStream platformJar = new FileInputStream(
-					"target/platform-2.0.0-SNAPSHOT-LarkcAssembly.jar");
+					"target/platform-2.5.0-SNAPSHOT-LarkcAssembly.jar");
 			ZipEntry platformOutEntry = new ZipEntry(WEB_INF + "lib/"
-					+ "platform-2.0.0-SNAPSHOT-LarkcAssembly.jar");
+					+ "platform-2.5.0-SNAPSHOT-LarkcAssembly.jar");
 			zipOutStream.putNextEntry(platformOutEntry);
 			copy(platformJar, zipOutStream);
 
