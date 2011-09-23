@@ -59,9 +59,9 @@ public class ORDIVariableBinding extends VariableBindingBase implements
 		}
 	}
 
-	public synchronized void handleSolution(BindingSet bindingset)
+	public void handleSolution(BindingSet bindingset)
 			throws TupleQueryResultHandlerException {
-		if (isClosed) {
+		if (isClosed.get()) {
 			throw new TupleQueryResultHandlerException("Closed!");
 		}
 		while (true) {
@@ -80,12 +80,12 @@ public class ORDIVariableBinding extends VariableBindingBase implements
 		getVariables();
 		out.writeObject(bindNames);
 		out.writeBoolean(i.hasNext());
-		while (i.hasNext()) {	
+		while (i.hasNext()) {
 			out.writeObject(i.next().getValues());
 			out.writeBoolean(i.hasNext());
 		}
 		out.flush();
-		isClosed = true;
+		isClosed.set(true);
 	}
 
 	@SuppressWarnings("unchecked")

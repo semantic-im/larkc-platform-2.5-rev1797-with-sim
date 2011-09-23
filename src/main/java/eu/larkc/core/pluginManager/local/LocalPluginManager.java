@@ -363,9 +363,8 @@ public class LocalPluginManager implements PluginManager {
 					logger.debug("Found input behavior for {}: {}",
 							mPlugin.toString(), neededInputs);
 				}
-
-				for (Queue<SetOfStatements> queue : inputQueues.get(pathId)) {
-					if (!queue.isEmpty()) {
+				while (neededInputs > 0) {
+					for (Queue<SetOfStatements> queue : inputQueues.get(pathId)) {
 						SetOfStatements queueElement = queue.take();
 						if (queueElement == null) {
 							logger.warn("No data in input queue. Found a NULL element in the input queue, probably some plug-in did not compute any results.");
@@ -379,27 +378,12 @@ public class LocalPluginManager implements PluginManager {
 							}
 						}
 						neededInputs--;
-					} else {
-						queue.addListener(this);
 					}
 				}
 			} else {
 				logger.debug("No input queues defined for {} ({})",
 						mPlugin.toString(), pathId);
 			}
-
-			try {
-				while (neededInputs > 0) {
-					logger.debug("Got notification");
-					isWaiting = true;
-					wait();
-				}
-				isWaiting = false;
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
 			return new SetOfStatementsImpl(statements);
 		}
 

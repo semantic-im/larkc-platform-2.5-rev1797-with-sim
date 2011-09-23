@@ -27,6 +27,7 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.openrdf.model.BNode;
 import org.openrdf.model.Statement;
@@ -60,7 +61,7 @@ import eu.larkc.core.util.RDFConstants;
  */
 public class VariableBindingBase implements VariableBinding {
 
-	protected transient boolean isClosed = false;
+	protected transient AtomicBoolean isClosed = new AtomicBoolean(false);
 	protected transient String[] bindNames;
 	protected transient BlockingQueue<BindingSet> results;
 	protected transient CloseableIterator<Binding> iterator;
@@ -123,12 +124,12 @@ public class VariableBindingBase implements VariableBinding {
 		public void remove() {
 		}
 
-		public synchronized void close() {
-			isClosed = true;
+		public void close() {
+			isClosed.set(true);
 		}
 
-		public synchronized boolean isClosed() {
-			return isClosed;
+		public boolean isClosed() {
+			return isClosed.get();
 		}
 	}
 
