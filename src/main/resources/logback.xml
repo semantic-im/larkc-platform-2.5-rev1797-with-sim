@@ -23,4 +23,8 @@
 	<level value="debug" />
 </logger>
 
+<logger name="sim">
+	<level value="debug" />
+</logger>
+
 </configuration>

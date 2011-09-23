@@ -1,15 +1,56 @@
 <aspectj>
 	<aspects>
-		<aspect name="sim.instrumentation.aop.aspectj.AbstractMethodInterceptor" />
-		<aspect name="sim.instrumentation.aop.aspectj.AnnotationMethodInterceptor" />
-		<aspect name="sim.instrumentation.aop.aspectj.larkc.InstrumentQuery" />
-		<aspect name="sim.instrumentation.aop.aspectj.larkc.InstrumentWorkflow" />
+		<aspect name="sim.instrumentation.aop.aspectj.AbstractContextCreator" />
+		<aspect name="sim.instrumentation.aop.aspectj.AbstractContextWriter" />
+		<aspect name="sim.instrumentation.aop.aspectj.AbstractMethodInstrumentation" />
+		<aspect name="sim.instrumentation.aop.aspectj.AnnotationContextCreator" />
+		<aspect name="sim.instrumentation.aop.aspectj.AnnotationContextWriter" />
+		<aspect name="sim.instrumentation.aop.aspectj.AnnotationMethodInstrumentation" />
+		<aspect name="sim.instrumentation.aop.aspectj.AnnotationTypeInstrumentation" />
+		<aspect name="sim.instrumentation.aop.aspectj.AspectsPrecedence" />
+
 		<aspect name="sim.instrumentation.aop.aspectj.larkc.InstrumentPlatform" />
 		<aspect name="sim.instrumentation.aop.aspectj.larkc.InstrumentPlugin" />
-		
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.InstrumentQuery" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.InstrumentWorkflow" />
+<!-- 		
+		<concrete-aspect name="sim.instrumentation.aop.aspectj.larkc.InstrumentDataLayer1"
+                               extends="sim.instrumentation.aop.aspectj.AbstractMethodInstrumentation">
+                <pointcut name="methodsToInstrument" expression="within(eu.larkc.core.data.**) AND execution(* *(..))"/>
+              </concrete-aspect>
+
+		<concrete-aspect name="sim.instrumentation.aop.aspectj.larkc.InstrumentDataLayer2"
+                               extends="sim.instrumentation.aop.aspectj.AbstractMethodInstrumentation">
+                <pointcut name="methodsToInstrument" expression="within(eu.larkc.core.query.**) AND execution(* *(..))"/>
+              </concrete-aspect>
+ -->
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.PlatformStartContextCreator" />
+
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.PluginExecutionContextCreator" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.PluginExecutionContextWriter1" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.PluginExecutionContextWriter2" />
+
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.QueryContextCreator" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.QueryContextWriter1" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.QueryContextWriter2" />
+
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.WorkflowCreationContextCreator" />
+
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.WorkflowExecutionContextCreator" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.WorkflowExecutionContextPropagator" />		
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.WorkflowExecutionContextWriter" />
+
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.DataLayerInsertsCounter" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.DataLayerSelectsCounter" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.ExceptionsCounter" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.MalformedSparqlQueryExceptionCounter" />
+		<aspect name="sim.instrumentation.aop.aspectj.larkc.OutOfMemoryErrorCounter" />
 	</aspects>
-	<weaver options="-verbose -showWeaveInfo">
+	<!--<weaver options="-verbose -showWeaveInfo">-->
+	<weaver>
 		<include within="eu.larkc..*" />
+		<include within="com.cyc.tool.subl.jrtl.nativeCode..*" />
+		<include within="sim.instrumentation.aop.aspectj.ContextHolder" />
 		<exclude within="sim..*" />
 	</weaver>
 </aspectj>
