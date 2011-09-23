@@ -111,9 +111,24 @@ public class ManagementInterfaceMain {
 			@Override
 			public Restlet createInboundRoot() {
 				try {
-					URL systemResource = ClassLoader
-							.getSystemResource(Resources.MGMT_HTML_ROOT);
-					URI localUri = systemResource.toURI();
+					// URL systemResource = ClassLoader
+					// .getSystemResource(Resources.MGMT_HTML_ROOT);
+
+					URI localUri;
+
+					java.io.File tmpFile = new java.io.File(
+							Resources.MGMT_HTML_ROOT);
+					if (tmpFile.exists())
+						localUri = tmpFile.toURI();
+					else {
+					 	URL systemResource = eu.larkc.core.Larkc.class
+								.getClassLoader().getResource(
+										Resources.MGMT_HTML_ROOT);
+						localUri = systemResource.toURI();
+					}
+
+					logger.debug("8182: {}", localUri);
+
 					LocalReference lr = new LocalReference(localUri.toString());
 					return new Directory(getContext(), lr);
 				} catch (IllegalArgumentException iae) {
