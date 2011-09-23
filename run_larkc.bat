@@ -1,0 +1,1 @@
+java -Xmx512M -jar target\platform-2.0.0-SNAPSHOT-LarkcAssembly.jar

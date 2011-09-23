@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+ <appender class="ch.qos.logback.core.ConsoleAppender" name="console">
+  <layout class="ch.qos.logback.classic.PatternLayout">
+   <pattern>%t %d{HH:mm:ss.SSS} %p %logger{15}: %m%n</pattern>
+  </layout>
+ </appender>
+
+  <root level="warn">
+    <appender-ref ref="console" />
+  </root>
+
+<logger name="org.apache.hadoop">
+	<level value="warn" />
+</logger>
+
+<logger name="org.apache.activemq">
+	<level value="warn" />
+</logger>
+
+<logger name="eu.larkc">
+	<level value="debug" />
+</logger>
+
+</configuration>

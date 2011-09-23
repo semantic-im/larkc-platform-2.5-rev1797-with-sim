@@ -1,0 +1,11 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix larkc: <http://larkc.eu/schema#> .
+
+# Define properties for the host emulated on the local machine
+_:host1 a <urn:eu.larkc.host.Local> .
+_:host1 larkc:hostType larkc:GAT .
+_:host1 larkc:gatBroker larkc:GAT-broker-local .
+_:host1 larkc:gatFileAdaptor larkc:GAT-fileadaptor-local .
+_:host1 larkc:gatWorkDir <file:////tmp> .
+_:host1 larkc:gatJavaDir <file:////usr/bin> .
+_:host1 larkc:gatJavaOptions "-Xmx512M" .

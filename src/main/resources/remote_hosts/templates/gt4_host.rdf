@@ -1,0 +1,14 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix larkc: <http://larkc.eu/schema#> .
+
+# Define properties for the host accessible via Globus Toolkit
+_:host1 a <urn:eu.larkc.host.GlobusToolkit4> .
+_:host1 larkc:hostType larkc:GAT .
+_:host1 larkc:gatBroker larkc:GAT-broker-wsgt4new .
+_:host1 larkc:gatFileAdaptor larkc:GAT-fileadaptor-gt4gridftp .
+_:host1 larkc:gatCertKey "your_key" .
+_:host1 larkc:gatUri <any://gridway.dgrid.hlrs.de> .
+_:host1 larkc:gatLarkcDir <file:////nfs/HOME/HLRS/hlrs/hpcochep/LarKC/platform> .
+_:host1 larkc:gatWorkDir <file:////data1/HLRS/dgrid/stbw0250/Temp> .
+_:host1 larkc:gatJavaDir <file:////opt/bwgrid/compiler/java/jdk1.6.0_20/bin> .
+_:host1 larkc:gatJavaOptions "-Xmx512M" .

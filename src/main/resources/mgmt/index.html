@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<style type="text/css" title="currentStyle" media="screen">
+	@import "style.css";
+	</style>
+</head>
+<body>
+<div id="main">
+<div id="header"></div>
+<h1>LarKC management interface</h1>
+
+<form id="get-workflows" action="http://localhost:8182/workflows"
+	method="get">
+<input type="submit" value="Show currently deployed workflows" />
+</form>
+
+
+<h2>Submit a workflow description (in N3 or RDF/XML format)</h2>
+
+<p>Use the following paths to submit your workflow
+descriptions:</p>
+<ul>
+	<li><b>HTTP GET /workflow?workflow=<i>&lt;http://example.com/workflow-description.rdf&gt;</i></b><br />
+	Where the <i>URL</i> is your remote workflow description or</li>
+	<li><b>HTTP POST /workflow</b><br />
+	Where the body of your HTTP POST is the workflow description in N3 or RDF/XML</li>
+</ul>
+<p>After successful workflow creation, use the following URL to get an endpoint for a specific
+workflow:</p>
+<ul>
+	<li><b>HTTP GET /workflow/<i>WID</i>/endpoint?urn=<i>&lt;endpointURN&gt;</i></b><br />
+	Where the <i>WID</i> is the unique ID of your workflow (as returned by
+	successful workflow creation) and <i>endpointURN</i> is the endpoint
+	specified in the workflow specification (e.g. urn:myQueryendpoint)<br />
+	Example: <code>http://localhost:8182/workflow/8790e257-19dc-4fdb-ab09-f473d0834598/endpoint?urn=urn:myQueryendpoint</code></li>
+</ul>
+
+<form id="submit-workflow" action="http://localhost:8182/workflow"
+	method="post">
+<textarea name="workflow" rows="20" cols="80">
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix larkc: <http://larkc.eu/schema#> .
+
+# Define two plug-ins
+_:plugin1 a <urn:eu.larkc.plugin.identify.TestIdentifier> .
+_:plugin2 a <urn:eu.larkc.plugin.transform.TestTransformer> .
+
+# Connect the plug-ins
+_:plugin1 larkc:connectsTo _:plugin2 .
+
+# Define a path to set the input and output of the workflow
+_:path a larkc:Path .
+_:path larkc:hasInput _:plugin1 .
+_:path larkc:hasOutput _:plugin2 .
+
+# Connect an endpoint to the path
+<urn:myQueryendpoint> a <urn:eu.larkc.endpoint.sparql> .
+<urn:myQueryendpoint> larkc:links _:path .
+</textarea>
+<br />
+<input type="submit" value="Submit" />
+<input type="reset" />
+</form>
+
+<form action="http://localhost:8183/sparql/" method="get">
+    <textarea name="query" rows="10" cols="120">
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+SELECT DISTINCT ?name where {
+    ?person rdf:type foaf:Person.
+    ?person foaf:name "Frank van Harmelen".
+    ?person2 rdf:type foaf:Person.
+    ?person2 foaf:knows ?person.
+    ?person2 foaf:name ?name.
+}
+</textarea><br/>
+    <input type="submit" value="Submit" />
+</form>
+</div>
+</body>
+</html>

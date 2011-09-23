@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+
+<rdf:Description rdf:about="urn:eu.larkc.endpoint.test">
+	<type xmlns="rdf:" rdf:resource="urn:eu.larkc.core.endpoint.test.TestEndpointMain"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:eu.larkc.endpoint.query">
+	<type xmlns="rdf:" rdf:resource="urn:eu.larkc.core.endpoint.query.QueryEndpointMain"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:eu.larkc.endpoint.push">
+	<type xmlns="rdf:" rdf:resource="urn:eu.larkc.core.endpoint.push.PushEndpoint"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:si.ijs.endpoint.active">
+	<type xmlns="rdf:" rdf:resource="urn:eu.larkc.core.endpoint.active.ActiveEndpoint"/>
+</rdf:Description>
+
+<rdf:Description rdf:about="urn:eu.larkc.endpoint.sparql">
+	<type xmlns="rdf:" rdf:resource="urn:eu.larkc.core.endpoint.sparql.SparqlHandler"/>
+</rdf:Description>
+
+</rdf:RDF>

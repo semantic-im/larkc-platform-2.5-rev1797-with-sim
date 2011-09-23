@@ -1,0 +1,42 @@
+html, body {
+	margin: 0;	padding: 0;
+	border: 0;
+}
+html>body {
+	color: #333;
+	font-family: "Lucida Grande", Verdana, sans-serif;
+	font-size: 75%;
+	line-height: 1.5;
+	margin: 0;
+	padding: 0;
+	background: #F4F4EC url(images/bg.png) repeat-x;
+}
+#main {
+	width: 920px;
+	background-color:#ccc;
+	margin: 0 auto;
+	padding: 0 2em 2em;
+	background: white url(images/bg.png) repeat-x;
+}
+#header {
+	margin: 0;	padding: 0;
+	width: 920px;
+	height: 162px;
+	background: url(images/Larkc.png) top center no-repeat;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+
+h2 {
+	padding-top: 2em;	
+}
+
+pre,code {
+	background: #CFCFC9;
+	font-family: Courier, "Courier New", Monospace;
+	line-height: 1.5;
+	margin: 1.5em 0;
+	padding: 3px;
+}

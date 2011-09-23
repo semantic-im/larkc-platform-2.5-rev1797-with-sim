@@ -1,0 +1,461 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>eu.larkc</groupId>
+	<artifactId>platform</artifactId>
+	<version>2.5.0-SNAPSHOT</version>
+	<name>Platform</name>
+	<description>LarKC Platform</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<repositories>
+		<!-- Official restlet repository -->
+		<repository>
+			<id>maven-restlet</id>
+			<name>Public online Restlet
+			repository</name>
+			<url>http://maven.restlet.org</url>
+		</repository>
+
+		<!--
+			Sesame repository by aduna (we need the new version of Sesame, hence
+			this repository)
+		-->
+		<repository>
+			<id>aduna-repo</id>
+			<name>Aduna repository</name>
+			<url>http://repo.aduna-software.org/maven2/releases/</url>
+		</repository>
+
+		<!-- External Maven repository of STI Innsbruck -->
+		<repository>
+			<id>maven-sti2</id>
+			<name>External Maven repository of STI Innsbruck</name>
+			<url>http://maven.sti2.at/archiva/repository/external</url>
+		</repository>
+		
+		<!-- External Maven repo for SIM artifacts -->
+		<repository>
+			<id>internal.maven.softgress.com</id>
+			<name>Internal Release Repository for SIM artifacts</name>
+			<url>http://maven.softgress.com:8080/archiva/repository/internal/</url>
+		</repository>
+		<repository>
+			<id>snapshots.maven.softgress.com</id>
+			<name>Internal Snapshot Repository for SIM artifacts</name>
+			<url>http://maven.softgress.com:8080/archiva/repository/snapshots/</url>
+		</repository>
+		
+	</repositories>
+
+	<dependencies>
+		<!-- Test -->
+		<dependency>
+			<groupId>org.apache</groupId>
+			<artifactId>hadoop.core</artifactId>
+			<version>0.20.1</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.larkc</groupId>
+			<artifactId>webpie</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<!-- JavaGAT -->
+		<dependency>
+			<groupId>nl.vu.cs.gridlab</groupId>
+			<artifactId>gat.api</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>nl.vu.cs.gridlab</groupId>
+			<artifactId>gat.engine</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		<!-- excluded
+		<dependency>
+			<groupId>nl.vu.cs.gridlab</groupId>
+			<artifactId>gat.tests</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+		-->
+		<!-- Sesame -->
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-runtime</artifactId>
+			<version>2.3.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openrdf.sesame</groupId>
+					<artifactId>sesame-queryparser-serql</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- Sesame dependencies -->
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-queryparser-sparql</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-query</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-api</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-queryparser-api</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-model</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-trig</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-turtle</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-rdfxml</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-rio-n3</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-sail-api</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-sail-memory</artifactId>
+			<version>2.3.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openrdf.sesame</groupId>
+					<artifactId>sesame-queryparser-serql</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-repository-sail</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openrdf.sesame</groupId>
+			<artifactId>sesame-repository-api</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+
+		<!-- RESTlet -->
+		<dependency>
+			<groupId>org.restlet.jse</groupId>
+			<artifactId>org.restlet</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+
+		<!-- Logging (log4j, slf4j and logback) -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>0.9.24</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.24</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>7.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jgrapht</groupId>
+			<artifactId>jgrapht-jdk1.5</artifactId>
+			<version>0.7.3</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+		</dependency>
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-all</artifactId>
+			<version>3.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.james</groupId>
+			<artifactId>apache-mime4j</artifactId>
+			<version>0.6</version>
+			<type>jar</type>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.3</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- ActiveMQ and dependent artifacts (used for messaging) -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>1.6.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- ORDI -->
+		<dependency>
+			<groupId>com.ontotext</groupId>
+			<artifactId>ordi.trree.adapter</artifactId>
+			<version>0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>3.0.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.ontotext</groupId>
+			<artifactId>ordi.model</artifactId>
+			<version>0.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ontotext</groupId>
+			<artifactId>swift.owlim</artifactId>
+			<version>3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ontotext</groupId>
+			<artifactId>swift.trree</artifactId>
+			<version>3.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ontotext</groupId>
+			<artifactId>owlim.big</artifactId>
+			<version>3.3.2237-20100706</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.6.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- SIM - Semantic Instrumentation & Monitoring -->
+		<dependency>
+			<groupId>sim</groupId>
+			<artifactId>sim-instrumentation</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>sim</groupId>
+			<artifactId>sim-instrumentation-larkc</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.9</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+		
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<!-- Assembles a single jar which includes all dependencies -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/LarkcAssembly.xml</descriptor>
+					</descriptors>
+					<!-- A default descriptor is deprecated due to a filtering in the resulting jar file is needed
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					-->
+					<archive>
+						<manifest>
+							<mainClass>eu.larkc.core.Larkc</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<id>add-test-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/main/test</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!--
+				Exclude LarkcTest and MgmtTest since they don't contain any test
+				cases
+			-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<excludes>
+						<exclude>**/LarkcTest.java</exclude>
+						<exclude>**/MgmtTest.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			
+			<!--
+				Clean ordi-trree and activemq-data directories as well
+			 -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>activemq-data</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+						<fileset>
+							<directory>ordi-trree</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>larkc.sourceforge.net</id>
+			<url>scp://shell.sourceforge.net/home/project-web/larkc/htdocs/maven</url>
+		</snapshotRepository>
+	        <!--        
+		<site>
+			<id>larkc.sourceforge.net</id>
+			<url>scp://shell.sourceforge.net/home/project-web/larkc/htdocs/maven</url>
+		</site>
+		-->
+	</distributionManagement>
+
+	<!-- Reporting is used for automatic JavaDoc publishing -->
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>

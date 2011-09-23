@@ -1,0 +1,7 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix larkc: <http://larkc.eu/schema#> .
+
+# Define properties for the web server hosting the plug-in
+_:host1 a <urn:eu.larkc.host.Tomcat> .
+_:host1 larkc:hostType larkc:JEE .
+_:host1 larkc:jeeUri <http://angelina.hlrs.de:8080> .

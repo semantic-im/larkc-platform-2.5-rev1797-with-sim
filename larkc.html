@@ -1,0 +1,58 @@
+<html>
+ <head>
+  <title>LarKC Platform Interface</title>
+ </head>
+ <body>
+  <h1>Workflow Description</h1>
+  <form action="http://localhost:8182/rdf/workflows" method="post">
+    <textarea name="workflow" rows="35" cols="120"><?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:schema="http://larkc.eu/schema#" xmlns:blahblah="http://blahblah#">
+<rdf:Description rdf:nodeID="SparqlQueryEvaluationReasoner">
+<schema:pluginType rdf:resource="urn:eu.larkc.plugin.reasoner.SparqlQueryEvaluationReasoner" />
+<schema:pluginParameter>
+	<rdf:Description>
+		<blahblah:data rdf:resource="http://larkc.eu/schema#data" />
+	</rdf:Description>
+</schema:pluginParameter>
+</rdf:Description>
+<rdf:Description>
+	<schema:pluginType rdf:resource="http://larkc.eu/schema#workflowInput" />
+	<schema:pluginConnectsTo rdf:nodeID="SparqlQueryEvaluationReasoner" />
+</rdf:Description>
+<rdf:Description>
+	<schema:pluginType rdf:resource="urn:eu.larkc.plugin.hadoop.FileIdentifier" />
+	<schema:pluginConnectsTo>
+		<rdf:Description>
+			<schema:pluginType rdf:resource="urn:eu.larkc.plugin.hadoop.HadoopRDFReader" />
+			<schema:pluginConnectsTo rdf:nodeID="SparqlQueryEvaluationReasoner" />
+			<schema:pluginParameters>
+				<rdf:Description>
+					<schema:defaultoutputname rdf:resource="http://larkc.eu/schema#data" />
+				</rdf:Description>
+			</schema:pluginParameters>
+		</rdf:Description>
+	</schema:pluginConnectsTo>
+	<schema:pluginParameters schema:attvalue="larkc:input->../sample_data/foaf" />
+</rdf:Description>
+<rdf:Description rdf:nodeID="endpoint1">
+	<schema:endpointType rdf:resource="urn:eu.larkc.endpoint.sparql"/>
+</rdf:Description>
+</rdf:RDF>
+</textarea><br/>
+    <input type="submit" value="Submit" />
+  </form>
+  <h1>SPARQL Query</h1>
+  <form action="http://localhost:8183/sparql/" method="get">
+    <textarea name="query" rows="10" cols="120">PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+SELECT DISTINCT ?name where {
+?person rdf:type foaf:Person.
+?person foaf:name "Frank van Harmelen".
+?person2 rdf:type foaf:Person.
+?person2 foaf:knows ?person.
+?person2 foaf:name ?name.
+}</textarea><br/>
+    <input type="submit" value="Submit" />
+  </form>
+ </body>
+</html>

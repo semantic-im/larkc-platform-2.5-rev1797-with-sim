@@ -1,0 +1,13 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix larkc: <http://larkc.eu/schema#> .
+
+# Define properties for the host accessbile via Security Shell Protocol (ssh)
+_:host1 a <urn:eu.larkc.host.SshWithPublicKey> .
+_:host1 larkc:hostType larkc:GAT .
+_:host1 larkc:gatBroker larkc:GAT-broker-commandlinessh .
+_:host1 larkc:gatFileAdaptor larkc:GAT-fileadaptor-commandlinessh .
+_:host1 larkc:gatUri <any://frbw.dgrid.hlrs.de> .
+_:host1 larkc:gatLarkcDir <file:////nfs/HOME/HLRS/hlrs/hpcochep/LarKC/platform> .
+_:host1 larkc:gatWorkDir <file:////tmp> .
+_:host1 larkc:gatJavaDir <file:////opt/bwgrid/compiler/java/jdk1.6.0_20/bin> .
+_:host1 larkc:gatJavaOptions "-Xmx512M" .
