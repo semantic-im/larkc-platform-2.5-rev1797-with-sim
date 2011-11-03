@@ -17,6 +17,10 @@
  */
 package sim.instrumentation.aop.aspectj.larkc;
 
+import org.openrdf.model.URI;
+
+import eu.larkc.core.data.SetOfStatements;
+
 import sim.instrumentation.aop.aspectj.AbstractMethodInstrumentation;
 
 /**
@@ -25,6 +29,16 @@ import sim.instrumentation.aop.aspectj.AbstractMethodInstrumentation;
  */
 public aspect InstrumentPlugin extends AbstractMethodInstrumentation {
 
-	public pointcut methodsToInstrument(): within(eu.larkc.plugin.Plugin) && execution(* *(..));
+	public pointcut methodsToInstrument(): within(eu.larkc.plugin.Plugin) && execution(* *(..)) && 
+											! execution(public URI getIdentifier()) &&
+											! execution(public SetOfStatements getPluginParameters()) &&
+											! execution(public int getInputBehavior()) &&
+											! execution(public void setInputBehavior(int)) &&
+											! execution(private int extractInputBehavior(SetOfStatements)) &&
+											! execution(protected SetOfStatements getInvocationKey(SetOfStatements)) &&
+											! execution(protected SetOfStatements cacheLookup(SetOfStatements)) &&
+											! execution(protected void cacheInsert(SetOfStatements, SetOfStatements)) &&
+											! execution(protected URI getNamedGraphFromParameters(SetOfStatements, URI))
+											;
 
 }
